@@ -1,1 +1,1 @@
-web: telegrambot.py --log-file -
+init: python telegrambot.py --log-file -
