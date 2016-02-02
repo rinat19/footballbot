@@ -16,17 +16,7 @@
       </profile-state>
     </entry>
   </component>
-  <component name="ProjectRootManager" version="2" project-jdk-name="Remote Python 2.7.3(ssh://pi@192.168.1.91:22/usr/bin/python)" project-jdk-type="Python SDK" />
-  <component name="PyConsoleOptionsProvider">
-    <option name="myPythonConsoleState">
-      <console-settings />
-    </option>
-  </component>
-  <component name="SshConsoleOptionsProvider">
-    <option name="myEncoding" value="windows-1251" />
-    <option name="myConnectionType" value="DEFAULT_SDK" />
-    <option name="myConnectionId" value="" />
-  </component>
+  <component name="ProjectRootManager" version="2" project-jdk-name="Python 2.7.9 (C:/Python2.7/python.exe)" project-jdk-type="Python SDK" />
   <component name="masterDetails">
     <states>
       <state key="ScopeChooserConfigurable.UI">

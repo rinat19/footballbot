@@ -3,6 +3,7 @@ import requests
 import time
 import subprocess
 import os
+import sqlite3
 #import mailchecker
 
 requests.packages.urllib3.disable_warnings() # Подавление InsecureRequestWarning, с которым я пока ещё не разобрался
@@ -67,7 +68,7 @@ def run_command(offset, name, from_id, cmd):
         send_text(from_id, 'Привет! Идешь на футбол?') # Отправка ответа
 
     elif cmd == '/help': # Ответ на yes
-        send_text(from_id, 'Бот предназначен для переклички сотрудников, идущих на футбол. \n\nЕсли отметиться второй раз то бот перезапишет первый ответ. \nУзнать списки идущих и не идущих можно через команду /list') # Отправка ответа
+        send_text(from_id, 'Бот предназначен для переклички сотрудников, идущих на футбол. \n\nЕсли отметиться второй раз, то бот перезапишет первый ответ. \n\nУзнать списки идущих и неидущих можно через команду /list') # Отправка ответа
 
     elif cmd == '/yes': # Ответ на yes
         send_sticker(from_id, 'BQADAgAD_gQAAkKvaQABbdMfUUWsaZEC') # Отправка ответа
