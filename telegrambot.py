@@ -48,6 +48,7 @@ def check_updates():
             continue # и переходим к следующему обновлению
 
         from_id = update['message']['chat']['id'] # Извлечение ID чата (отправителя)
+        #name = update['message']['from']['username'] # Извлечение username отправителя
         name = update['message']['from']['first_name'] # Извлечение username отправителя
         if from_id != ADMIN_ID: # Если отправитель не является администратором, то
             if from_id != ADMIN_GROUP:
@@ -62,11 +63,20 @@ def check_updates():
         run_command(*parameters)
 
 def run_command(offset, name, from_id, cmd):
-    if cmd == '/yes': # Ответ на yes
+    if cmd == '/start': # Ответ на yes
+        send_text(from_id, 'Привет! Идешь на футбол?') # Отправка ответа
+
+    elif cmd == '/help': # Ответ на yes
+        send_text(from_id, 'Бот предназначен для переклички сотрудников, идущих на футбол. Если отметиться второй раз то бот перезапишет первый ответ. Узнать списки идущих и не идущих можно через команду /list') # Отправка ответа
+
+    elif cmd == '/yes': # Ответ на yes
         send_sticker(from_id, 'BQADAgAD_gQAAkKvaQABbdMfUUWsaZEC') # Отправка ответа
 
     elif cmd == '/no': # Ответ на no
         send_sticker(from_id, 'BQADAgADGgUAAkKvaQABSfrnIsfrgPYC') # Отправка ответа
+
+    elif cmd == '/list': # Ответ на no
+        send_text(from_id, 'в работе...') # Отправка ответа
 
 def log_event(text):
     """
