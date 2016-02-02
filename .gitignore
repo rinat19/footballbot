@@ -8,5 +8,6 @@
 [Ss]cripts
 pyvenv.cfg
 pip-selfcheck.json
+db_create.py
 
 # Created by .ignore support plugin (hsz.mobi)
