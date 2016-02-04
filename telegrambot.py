@@ -72,7 +72,7 @@ def run_command(offset, name, from_id, cmd):
         send_text(from_id, 'Бот предназначен для переклички сотрудников, идущих на футбол. \n\nЕсли отметиться второй раз, то бот перезапишет первый ответ. \n\nУзнать списки идущих и неидущих можно через команду /list') # Отправка ответа
 
     elif cmd == '/yes': # Ответ на yes
-        send_text(from_id, 'Молодцом!') # Отправка ответа
+        #send_text(from_id, 'Молодцом!') # Отправка ответа
         send_sticker(from_id, 'BQADAgAD_gQAAkKvaQABbdMfUUWsaZEC') # Отправка ответа
 
     elif cmd == '/no': # Ответ на no
@@ -80,7 +80,7 @@ def run_command(offset, name, from_id, cmd):
 
     elif cmd == '/list': # Ответ на no
         send_text(from_id, 'в работе...') # Отправка ответа
-        #db_select(from_id)
+        db_select(from_id)
 
 def log_event(text):
     """
