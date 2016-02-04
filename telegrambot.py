@@ -66,7 +66,7 @@ def check_updates():
 def run_command(offset, name, from_id, cmd):
     if cmd == '/start': # Ответ на yes
         send_text(from_id, 'Привет! Идешь на футбол?') # Отправка ответа
-        #db_insert(from_id, name)
+        db_insert(from_id, name)
 
     elif cmd == '/help': # Ответ на yes
         send_text(from_id, 'Бот предназначен для переклички сотрудников, идущих на футбол. \n\nЕсли отметиться второй раз, то бот перезапишет первый ответ. \n\nУзнать списки идущих и неидущих можно через команду /list') # Отправка ответа
