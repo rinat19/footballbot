@@ -79,7 +79,7 @@ def run_command(offset, name, from_id, cmd):
 
     elif cmd == '/list': # Ответ на no
         send_text(from_id, 'в работе...') # Отправка ответа
-        db_select()
+        db_select(from_id)
 
 def log_event(text):
     """
@@ -158,7 +158,7 @@ def db_update(chat_id, photo_id):
     conn.close()
     return True
 
-def db_select():
+def db_select(chat_id):
     conn = sqlite3.connect('telegrambot.db')
     log_event('Opened database successfully.')
     cursor = conn.execute("SELECT first_name, second_name, username FROM footballer WHERE visit==1")
