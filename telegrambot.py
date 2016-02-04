@@ -66,6 +66,7 @@ def check_updates():
 def run_command(offset, name, from_id, cmd):
     if cmd == '/start': # Ответ на yes
         send_text(from_id, 'Привет! Идешь на футбол?') # Отправка ответа
+        db_insert(from_id, name)
 
     elif cmd == '/help': # Ответ на yes
         send_text(from_id, 'Бот предназначен для переклички сотрудников, идущих на футбол. \n\nЕсли отметиться второй раз, то бот перезапишет первый ответ. \n\nУзнать списки идущих и неидущих можно через команду /list') # Отправка ответа
@@ -78,6 +79,7 @@ def run_command(offset, name, from_id, cmd):
 
     elif cmd == '/list': # Ответ на no
         send_text(from_id, 'в работе...') # Отправка ответа
+        db_select()
 
 def log_event(text):
     """
@@ -136,6 +138,41 @@ def check_mail():
     if not respond: respond = 'No new mail.' # Если ответ пустой, тогда заменяем его на соответствующее сообщение
     send_text(ADMIN_ID, respond) # Отправляем это сообщение администратору
     return True
+
+def db_insert(from_id, name):
+    conn = sqlite3.connect('telegrambot.db')
+    log_event('Opened database successfully')
+    conn.execute("INSERT INTO footballer (user_id, first_name, second_name, username, visit, resp_date) \
+      VALUES (from_id, name, NULL, 'NULL', NULL, NULL)")
+    conn.commit()
+    log_event('Records created successfully')
+    conn.close()
+    return True
+
+def db_update(chat_id, photo_id):
+    conn = sqlite3.connect('telegrambot.db')
+    log_event('Opened database successfully.')
+    conn.execute("UPDATE footballer SET visit = visit_id WHERE user_id=from_id")
+    conn.commit()
+    log_event('Records updated successfully.')
+    conn.close()
+    return True
+
+def db_select():
+    conn = sqlite3.connect('telegrambot.db')
+    log_event('Opened database successfully.')
+    cursor = conn.execute("SELECT first_name0, second_name, username FROM footballer WHERE visit==1")
+    for row in cursor:
+        print "first_name = ", row[0]
+        print "second_name = ", row[1]
+        print "username = ", row[2], "\n"
+    log_event('Operation done successfully.')
+    conn.close()
+    data = {'chat_id': chat_id, 'text': cursor} # Формирование запроса
+    request = requests.post(URL + TOKEN + '/sendMessage', data=data) # HTTP запрос
+    if not request.status_code == 200: # Проверка ответа сервера
+        return False # Возврат с неудачей
+    return request.json()['ok'] # Проверка успешности обращения к API
 
 if __name__ == "__main__":
     while True:
