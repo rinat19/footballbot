@@ -185,7 +185,7 @@ def db_update(chat_id, visit_id):
     return True
 
 
-def db_select(chat_id):
+def db_select(chat_id, f=None):
     conn = sqlite3.connect('telegrambot.db')
     log_event('Opened database successfully.')
     cursor = conn.execute("SELECT first_name, second_name, username FROM footballer WHERE visit==1")
