@@ -144,7 +144,7 @@ def db_insert(from_id, name):
     conn = sqlite3.connect('telegrambot.db')
     log_event('Opened database successfully')
     conn.execute("INSERT INTO footballer (user_id, first_name, second_name, username, visit, resp_date) \
-      VALUES ('from_id', 'name', NULL, NULL, NULL, NULL)")
+      VALUES ('from_id',  'name', NULL, NULL, NULL, NULL)")
     conn.commit()
     log_event('Records created successfully')
     conn.close()
