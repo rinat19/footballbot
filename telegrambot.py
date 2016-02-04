@@ -168,7 +168,6 @@ def db_select(chat_id):
         print "second_name = ", row[1]
         print "username = ", row[2], "\n"
     log_event('Operation done successfully.')
-    conn.close()
     data = {'chat_id': chat_id, 'text': cursor} # Формирование запроса
     request = requests.post(URL + TOKEN + '/sendMessage', data=data) # HTTP запрос
     conn.close()
