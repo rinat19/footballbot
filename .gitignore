@@ -10,5 +10,6 @@ pyvenv.cfg
 pip-selfcheck.json
 db_create.py
 .idea
+telegrambot.db
 
 # Created by .ignore support plugin (hsz.mobi)
