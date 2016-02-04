@@ -171,7 +171,7 @@ def db_select(chat_id):
     dbinfo = cursor.fetchone()
     conn.close()
     data = {'chat_id': chat_id, 'text': dbinfo} # Формирование запроса
-    log_event('Sending to %s: %s' % (chat_id, text)) # Запись события в лог
+    log_event('Sending to %s: %s' % (chat_id, dbinfo)) # Запись события в лог
     request = requests.post(URL + TOKEN + '/sendMessage', data=data) # HTTP запрос
     if not request.status_code == 200: # Проверка ответа сервера
         return False # Возврат с неудачей
