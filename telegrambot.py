@@ -81,7 +81,7 @@ def run_command(offset, name, from_id, cmd):
 
     elif cmd == '/no':  # Ответ на no
         send_sticker(from_id, 'BQADAgADGgUAAkKvaQABSfrnIsfrgPYC')  # Отправка ответа
-        db_select(from_id, 0)
+        db_update(from_id, 0)
 
     elif cmd == '/list':  # Ответ на no
         #send_text(from_id, 'в работе...') # Отправка ответа
