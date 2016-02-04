@@ -167,7 +167,7 @@ def db_select(chat_id):
 #        print "first_name = ", row[0]
 #        print "second_name = ", row[1]
 #        print "username = ", row[2], "\n"
-    for f, s, u in cursor.fetchone():
+    for f, s, u in cursor.fetchall():
         print f, s, u
     log_event('Operation done successfully.')
 #    dbinfo = cursor.fetchone()
