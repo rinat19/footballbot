@@ -51,11 +51,11 @@ def check_updates():
         from_id = update['message']['chat']['id'] # Извлечение ID чата (отправителя)
         #name = update['message']['from']['username'] # Извлечение username отправителя
         name = update['message']['from']['first_name'] # Извлечение username отправителя
-        if from_id != ADMIN_ID: # Если отправитель не является администратором, то
-            if from_id != ADMIN_GROUP:
-                send_text(from_id, "You're not autorized to use me!") # ему отправляется соответствующее уведомление
-                log_event('Unautorized: %s' % update) # обновление записывается в лог
-                continue # и цикл переходит к следующему обновлению
+#        if from_id != ADMIN_ID: # Если отправитель не является администратором, то
+#            if from_id != ADMIN_GROUP:
+#                send_text(from_id, "You're not autorized to use me!") # ему отправляется соответствующее уведомление
+#                log_event('Unautorized: %s' % update) # обновление записывается в лог
+#                continue # и цикл переходит к следующему обновлению
         message = update['message']['text'] # Извлечение текста сообщения
         parameters = (offset, name, from_id, message)
         log_event('Message (id%s) from %s (id%s): "%s"' % parameters) # Вывод в лог ID и текста сообщения
