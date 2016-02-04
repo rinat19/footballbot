@@ -167,7 +167,7 @@ def db_insert(from_id, name):
         cur.close()
         return True
     else:
-            log_event('Records selected successfully')
+        log_event('Records selected successfully')
         return True
 
 
