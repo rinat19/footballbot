@@ -1,1 +1,1 @@
-init: python telegrambot.py
+web:
