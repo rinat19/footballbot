@@ -177,7 +177,7 @@ def db_insert(from_id, name):
 def db_update(chat_id, visit_id):
     conn = sqlite3.connect('telegrambot.db')
     log_event('Opened database successfully.')
-    conn.execute("UPDATE footballer SET visit==:visit_id WHERE user_id==:chat_id")
+    conn.execute("UPDATE footballer SET visit==:visit WHERE user_id==:user_id", {'visit': visit_id, 'user_id': chat_id})
     #conn.execute('UPDATE meshblock_1107 SET etv_1107==:update_1 WHERE meshblock_06==:select_1', {'update_1':pv[0:2], 'select_1':'21'})
     conn.commit()
     log_event('Records updated successfully.')
