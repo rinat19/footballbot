@@ -155,7 +155,9 @@ def db_insert(from_id, name):
     log_event('Opened database successfully')
     cursor = conn.execute("SELECT user_id FROM footballer WHERE user_id == 222222")
     u = cursor.fetchall()
-    if u is not None: return True
+    if u is not None:
+        log_event('Records selected successfully')
+        return True
     else:
         values = {'user_id': 222222, 'first_name': 'name', 'second_name': None, 'username': None, 'visit': None,
               'resp_date': None}
