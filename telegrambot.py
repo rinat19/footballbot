@@ -163,15 +163,17 @@ def db_select(chat_id):
     conn = sqlite3.connect('telegrambot.db')
     log_event('Opened database successfully.')
     cursor = conn.execute("SELECT first_name, second_name, username FROM footballer WHERE visit==1")
-    for row in cursor:
-        print "first_name = ", row[0]
-        print "second_name = ", row[1]
-        print "username = ", row[2], "\n"
+#    for row in cursor:
+#        print "first_name = ", row[0]
+#        print "second_name = ", row[1]
+#        print "username = ", row[2], "\n"
+    for f, s, u in cursor.fetchall():
+        print f, s, u
     log_event('Operation done successfully.')
-    dbinfo = cursor.fetchone()
+#    dbinfo = cursor.fetchone()
     conn.close()
-    data = {'chat_id': chat_id, 'text': dbinfo} # Формирование запроса
-    log_event('Sending to %s: %s' % (chat_id, dbinfo)) # Запись события в лог
+    data = {'chat_id': chat_id, 'text': f, s, u} # Формирование запроса
+    log_event('Sending to %s: %s' % (chat_id, f, s, u)) # Запись события в лог
     request = requests.post(URL + TOKEN + '/sendMessage', data=data) # HTTP запрос
     if not request.status_code == 200: # Проверка ответа сервера
         return False # Возврат с неудачей
