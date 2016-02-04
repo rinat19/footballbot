@@ -79,7 +79,7 @@ def run_command(offset, name, from_id, cmd):
         send_sticker(from_id, 'BQADAgADGgUAAkKvaQABSfrnIsfrgPYC') # Отправка ответа
 
     elif cmd == '/list': # Ответ на no
-        send_text(from_id, 'в работе...') # Отправка ответа
+        #send_text(from_id, 'в работе...') # Отправка ответа
         db_select(from_id)
 
 def log_event(text):
