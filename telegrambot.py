@@ -156,15 +156,16 @@ def db_insert(from_id, name):
     cursor = conn.execute("SELECT user_id FROM footballer WHERE user_id == 11111")
     u = cursor.fetchall()
     if u is not None: return True
-    values = {'user_id': 11111, 'first_name': 'name', 'second_name': None, 'username': None, 'visit': None,
+    else:
+        values = {'user_id': 11111, 'first_name': 'name', 'second_name': None, 'username': None, 'visit': None,
               'resp_date': None}
-    conn.execute(
-        "INSERT INTO footballer (user_id, first_name, second_name, username, visit, resp_date) VALUES (:user_id, :first_name, :second_name, :username, :visit, :resp_date)",
-        values)
-    conn.commit()
-    log_event('Records created successfully')
-    conn.close()
-    return True
+        conn.execute(
+            "INSERT INTO footballer (user_id, first_name, second_name, username, visit, resp_date) VALUES (:user_id, :first_name, :second_name, :username, :visit, :resp_date)",
+            values)
+        conn.commit()
+        log_event('Records created successfully')
+        conn.close()
+        return True
 
 
 def db_update(chat_id, photo_id):
