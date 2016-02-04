@@ -158,7 +158,7 @@ def db_insert(from_id, name):
     cursor = conn.cursor()
     cursor.execute("SELECT user_id FROM footballer WHERE user_id == '222222'")
     u = cursor.fetchone()
-    if u is None:
+    if not u:
         values = {'user_id': 222222, 'first_name': name, 'second_name': None, 'username': None, 'visit': None,
               'resp_date': None}
         cursor.execute(
@@ -169,7 +169,7 @@ def db_insert(from_id, name):
         conn.close()
         return True
     else:
-        log_event('Records selected successfully')
+        log_event('Record is created yet')
         return True
 
 
@@ -198,6 +198,7 @@ def db_select(chat_id):
     log_event('Operation done successfully.')
     #    dbinfo = cursor.fetchone()
     conn.close()
+    if not f: f = '*Список пуст*'  # Если ответ пустой, тогда заменяем его на соответствующее сообщение
     data = {'chat_id': chat_id, 'text': f}  # Формирование запроса
     log_event('Sending to %s: %s' % (chat_id, f))  # Запись события в лог
     request = requests.post(URL + TOKEN + '/sendMessage', data=data)  # HTTP запрос
