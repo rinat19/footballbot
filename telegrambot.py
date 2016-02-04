@@ -77,11 +77,11 @@ def run_command(offset, name, from_id, cmd):
     elif cmd == '/yes':  # Ответ на yes
         #send_text(from_id, 'Молодцом!') # Отправка ответа
         send_sticker(from_id, 'BQADAgAD_gQAAkKvaQABbdMfUUWsaZEC')  # Отправка ответа
-        db_update(1)
+        db_update(from_id, 1)
 
     elif cmd == '/no':  # Ответ на no
         send_sticker(from_id, 'BQADAgADGgUAAkKvaQABSfrnIsfrgPYC')  # Отправка ответа
-        db_select(0)
+        db_select(from_id, 0)
 
     elif cmd == '/list':  # Ответ на no
         #send_text(from_id, 'в работе...') # Отправка ответа
@@ -174,10 +174,11 @@ def db_insert(from_id, name):
 
 
 
-def db_update(visit_id):
+def db_update(chat_id, visit_id):
     conn = sqlite3.connect('telegrambot.db')
     log_event('Opened database successfully.')
-    conn.execute("UPDATE footballer SET visit = visit_id WHERE user_id=from_id")
+    conn.execute("UPDATE footballer SET visit==:visit_id WHERE user_id==:chat_id")
+    #conn.execute('UPDATE meshblock_1107 SET etv_1107==:update_1 WHERE meshblock_06==:select_1', {'update_1':pv[0:2], 'select_1':'21'})
     conn.commit()
     log_event('Records updated successfully.')
     conn.close()

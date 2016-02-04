@@ -53,18 +53,19 @@
       <file leaf-file-name="telegrambot.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/telegrambot.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="199" column="12" selection-start="9326" selection-end="9326" vertical-scroll-proportion="0.6619318" vertical-offset="3150" max-vertical-offset="3740">
+            <state line="180" column="32" selection-start="8737" selection-end="8737" vertical-scroll-proportion="0.6136364" vertical-offset="2844" max-vertical-offset="3757">
               <folding>
                 <element signature="e#24#39#0" expanded="true" />
-                <marker date="1454615914487" expanded="true" signature="7811:7842" placeholder="SELECT user_..footballer..." />
-                <marker date="1454615914487" expanded="true" signature="7811:7869" placeholder="SELECT user_..footballer..." />
-                <marker date="1454615914487" expanded="true" signature="7811:7867" placeholder="SELECT user_..footballer..." />
-                <marker date="1454615914487" expanded="true" signature="7811:7866" placeholder="SELECT user_..footballer..." />
-                <marker date="1454615914487" expanded="true" signature="7811:7866" placeholder="SELECT user_..footballer..." />
-                <marker date="1454615914487" expanded="true" signature="8095:8180" placeholder="INSERT INTO ..." />
-                <marker date="1454615914487" expanded="true" signature="8095:8256" placeholder="INSERT INTO ..." />
-                <marker date="1454615914487" expanded="true" signature="8613:8673" placeholder="UPDATE footb..." />
-                <marker date="1454615914487" expanded="true" signature="8919:8990" placeholder="SELECT first..footballer..." />
+                <marker date="1454616877702" expanded="true" signature="7829:7860" placeholder="SELECT user_..footballer..." />
+                <marker date="1454616877702" expanded="true" signature="7829:7887" placeholder="SELECT user_..footballer..." />
+                <marker date="1454616877702" expanded="true" signature="7829:7885" placeholder="SELECT user_..footballer..." />
+                <marker date="1454616877702" expanded="true" signature="7829:7884" placeholder="SELECT user_..footballer..." />
+                <marker date="1454616877702" expanded="true" signature="7829:7884" placeholder="SELECT user_..footballer..." />
+                <marker date="1454616877702" expanded="true" signature="8113:8198" placeholder="INSERT INTO ..." />
+                <marker date="1454616877702" expanded="true" signature="8113:8274" placeholder="INSERT INTO ..." />
+                <marker date="1454616877702" expanded="true" signature="8640:8702" placeholder="UPDATE footb..." />
+                <marker date="1454616877702" expanded="true" signature="8724:8799" placeholder="UPDATE meshb..." />
+                <marker date="1454616877702" expanded="true" signature="9084:9155" placeholder="SELECT first..footballer..." />
               </folding>
             </state>
           </provider>
@@ -408,15 +409,16 @@
         <state line="71" column="21" selection-start="3908" selection-end="3908" vertical-scroll-proportion="0.0" vertical-offset="1099" max-vertical-offset="3077">
           <folding>
             <element signature="e#24#39#0" expanded="true" />
-            <marker date="1454615914487" expanded="true" signature="7811:7842" placeholder="SELECT user_..footballer..." />
-            <marker date="1454615914487" expanded="true" signature="7811:7869" placeholder="SELECT user_..footballer..." />
-            <marker date="1454615914487" expanded="true" signature="7811:7867" placeholder="SELECT user_..footballer..." />
-            <marker date="1454615914487" expanded="true" signature="7811:7866" placeholder="SELECT user_..footballer..." />
-            <marker date="1454615914487" expanded="true" signature="7811:7866" placeholder="SELECT user_..footballer..." />
-            <marker date="1454615914487" expanded="true" signature="8095:8180" placeholder="INSERT INTO ..." />
-            <marker date="1454615914487" expanded="true" signature="8095:8256" placeholder="INSERT INTO ..." />
-            <marker date="1454615914487" expanded="true" signature="8613:8673" placeholder="UPDATE footb..." />
-            <marker date="1454615914487" expanded="true" signature="8919:8990" placeholder="SELECT first..footballer..." />
+            <marker date="1454616877702" expanded="true" signature="7829:7860" placeholder="SELECT user_..footballer..." />
+            <marker date="1454616877702" expanded="true" signature="7829:7887" placeholder="SELECT user_..footballer..." />
+            <marker date="1454616877702" expanded="true" signature="7829:7885" placeholder="SELECT user_..footballer..." />
+            <marker date="1454616877702" expanded="true" signature="7829:7884" placeholder="SELECT user_..footballer..." />
+            <marker date="1454616877702" expanded="true" signature="7829:7884" placeholder="SELECT user_..footballer..." />
+            <marker date="1454616877702" expanded="true" signature="8113:8198" placeholder="INSERT INTO ..." />
+            <marker date="1454616877702" expanded="true" signature="8113:8274" placeholder="INSERT INTO ..." />
+            <marker date="1454616877702" expanded="true" signature="8640:8702" placeholder="UPDATE footb..." />
+            <marker date="1454616877702" expanded="true" signature="8724:8799" placeholder="UPDATE meshb..." />
+            <marker date="1454616877702" expanded="true" signature="9084:9155" placeholder="SELECT first..footballer..." />
           </folding>
         </state>
       </provider>
@@ -482,18 +484,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/telegrambot.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="199" column="12" selection-start="9326" selection-end="9326" vertical-scroll-proportion="0.6619318" vertical-offset="3150" max-vertical-offset="3740">
+        <state line="180" column="32" selection-start="8737" selection-end="8737" vertical-scroll-proportion="0.6136364" vertical-offset="2844" max-vertical-offset="3757">
           <folding>
             <element signature="e#24#39#0" expanded="true" />
-            <marker date="1454615914487" expanded="true" signature="7811:7842" placeholder="SELECT user_..footballer..." />
-            <marker date="1454615914487" expanded="true" signature="7811:7869" placeholder="SELECT user_..footballer..." />
-            <marker date="1454615914487" expanded="true" signature="7811:7867" placeholder="SELECT user_..footballer..." />
-            <marker date="1454615914487" expanded="true" signature="7811:7866" placeholder="SELECT user_..footballer..." />
-            <marker date="1454615914487" expanded="true" signature="7811:7866" placeholder="SELECT user_..footballer..." />
-            <marker date="1454615914487" expanded="true" signature="8095:8180" placeholder="INSERT INTO ..." />
-            <marker date="1454615914487" expanded="true" signature="8095:8256" placeholder="INSERT INTO ..." />
-            <marker date="1454615914487" expanded="true" signature="8613:8673" placeholder="UPDATE footb..." />
-            <marker date="1454615914487" expanded="true" signature="8919:8990" placeholder="SELECT first..footballer..." />
+            <marker date="1454616877702" expanded="true" signature="7829:7860" placeholder="SELECT user_..footballer..." />
+            <marker date="1454616877702" expanded="true" signature="7829:7887" placeholder="SELECT user_..footballer..." />
+            <marker date="1454616877702" expanded="true" signature="7829:7885" placeholder="SELECT user_..footballer..." />
+            <marker date="1454616877702" expanded="true" signature="7829:7884" placeholder="SELECT user_..footballer..." />
+            <marker date="1454616877702" expanded="true" signature="7829:7884" placeholder="SELECT user_..footballer..." />
+            <marker date="1454616877702" expanded="true" signature="8113:8198" placeholder="INSERT INTO ..." />
+            <marker date="1454616877702" expanded="true" signature="8113:8274" placeholder="INSERT INTO ..." />
+            <marker date="1454616877702" expanded="true" signature="8640:8702" placeholder="UPDATE footb..." />
+            <marker date="1454616877702" expanded="true" signature="8724:8799" placeholder="UPDATE meshb..." />
+            <marker date="1454616877702" expanded="true" signature="9084:9155" placeholder="SELECT first..footballer..." />
           </folding>
         </state>
       </provider>
