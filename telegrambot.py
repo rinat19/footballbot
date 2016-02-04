@@ -167,13 +167,13 @@ def db_select(chat_id):
 #        print "first_name = ", row[0]
 #        print "second_name = ", row[1]
 #        print "username = ", row[2], "\n"
-    for f, s, u in cursor.fetchall():
+    for f, s, u in cursor.fetchone():
         print f, s, u
     log_event('Operation done successfully.')
 #    dbinfo = cursor.fetchone()
     conn.close()
     data = {'chat_id': chat_id, 'text': f} # Формирование запроса
-    log_event('Sending to %s: %s' % (chat_id, f, s, u)) # Запись события в лог
+    log_event('Sending to %s: %s' % (chat_id, f)) # Запись события в лог
     request = requests.post(URL + TOKEN + '/sendMessage', data=data) # HTTP запрос
     if not request.status_code == 200: # Проверка ответа сервера
         return False # Возврат с неудачей
