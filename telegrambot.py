@@ -143,8 +143,9 @@ def check_mail():
 def db_insert(from_id, name):
     conn = sqlite3.connect('telegrambot.db')
     log_event('Opened database successfully')
+    values = {'user_id':'from_id', 'first_name':'name', 'second_name':None, 'username':None, 'visit':None, 'resp_date':None}
     conn.execute("INSERT INTO footballer (user_id, first_name, second_name, username, visit, resp_date) \
-      VALUES ('from_id', 'name')")
+      VALUES (:user_id, :first_name, :second_name, :username, :visit, :resp_date)", values)
     conn.commit()
     log_event('Records created successfully')
     conn.close()
