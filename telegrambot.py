@@ -5,6 +5,7 @@ import subprocess
 import os
 import sqlite3
 #import mailchecker
+from db_create import cur
 
 requests.packages.urllib3.disable_warnings()  # Подавление InsecureRequestWarning, с которым я пока ещё не разобрался
 
