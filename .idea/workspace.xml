@@ -23,10 +23,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Procfile" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="Procfile" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Procfile">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="1" column="0" selection-start="5" selection-end="5" vertical-scroll-proportion="0.04347826" vertical-offset="0" max-vertical-offset="391">
+            <state line="1" column="27" selection-start="5" selection-end="32" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="119">
               <folding />
             </state>
           </provider>
@@ -50,20 +50,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="telegrambot.py" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="telegrambot.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/telegrambot.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="172" column="28" selection-start="8691" selection-end="8691" vertical-scroll-proportion="0.0" vertical-offset="2835" max-vertical-offset="3213">
+            <state line="163" column="44" selection-start="8246" selection-end="8246" vertical-scroll-proportion="0.23544973" vertical-offset="2682" max-vertical-offset="3213">
               <folding>
                 <element signature="e#24#39#0" expanded="true" />
-                <marker date="1454595485468" expanded="true" signature="7544:7668" placeholder="INSERT INTO ..." />
-                <marker date="1454595485468" expanded="true" signature="7544:7655" placeholder="INSERT INTO ..." />
-                <marker date="1454595485468" expanded="true" signature="7544:7654" placeholder="INSERT INTO ..." />
-                <marker date="1454595485468" expanded="true" signature="7544:7666" placeholder="INSERT INTO ..." />
-                <marker date="1454595485468" expanded="true" signature="7544:7686" placeholder="INSERT INTO ..." />
-                <marker date="1454595485468" expanded="true" signature="7931:7993" placeholder="UPDATE COMPA..." />
-                <marker date="1454595485468" expanded="true" signature="7931:7991" placeholder="UPDATE footb..." />
-                <marker date="1454595485468" expanded="true" signature="8229:8301" placeholder="SELECT first..footballer..." />
+                <marker date="1454596619720" expanded="true" signature="7544:7668" placeholder="INSERT INTO ..." />
+                <marker date="1454596619720" expanded="true" signature="7544:7655" placeholder="INSERT INTO ..." />
+                <marker date="1454596619720" expanded="true" signature="7544:7654" placeholder="INSERT INTO ..." />
+                <marker date="1454596619720" expanded="true" signature="7544:7666" placeholder="INSERT INTO ..." />
+                <marker date="1454596619720" expanded="true" signature="7544:7686" placeholder="INSERT INTO ..." />
+                <marker date="1454596619720" expanded="true" signature="7931:7993" placeholder="UPDATE COMPA..." />
+                <marker date="1454596619720" expanded="true" signature="7931:7991" placeholder="UPDATE footb..." />
+                <marker date="1454596619720" expanded="true" signature="8229:8300" placeholder="SELECT first..footballer..." />
               </folding>
             </state>
           </provider>
@@ -92,8 +92,8 @@
         <option value="$PROJECT_DIR$/requirements.txt" />
         <option value="$PROJECT_DIR$/db_create.py" />
         <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/telegrambot.py" />
         <option value="$PROJECT_DIR$/Procfile" />
+        <option value="$PROJECT_DIR$/telegrambot.py" />
       </list>
     </option>
   </component>
@@ -407,14 +407,14 @@
         <state line="71" column="21" selection-start="3908" selection-end="3908" vertical-scroll-proportion="0.0" vertical-offset="1099" max-vertical-offset="3077">
           <folding>
             <element signature="e#24#39#0" expanded="true" />
-            <marker date="1454595485468" expanded="true" signature="7544:7668" placeholder="INSERT INTO ..." />
-            <marker date="1454595485468" expanded="true" signature="7544:7655" placeholder="INSERT INTO ..." />
-            <marker date="1454595485468" expanded="true" signature="7544:7654" placeholder="INSERT INTO ..." />
-            <marker date="1454595485468" expanded="true" signature="7544:7666" placeholder="INSERT INTO ..." />
-            <marker date="1454595485468" expanded="true" signature="7544:7686" placeholder="INSERT INTO ..." />
-            <marker date="1454595485468" expanded="true" signature="7931:7993" placeholder="UPDATE COMPA..." />
-            <marker date="1454595485468" expanded="true" signature="7931:7991" placeholder="UPDATE footb..." />
-            <marker date="1454595485468" expanded="true" signature="8229:8301" placeholder="SELECT first..footballer..." />
+            <marker date="1454596619720" expanded="true" signature="7544:7668" placeholder="INSERT INTO ..." />
+            <marker date="1454596619720" expanded="true" signature="7544:7655" placeholder="INSERT INTO ..." />
+            <marker date="1454596619720" expanded="true" signature="7544:7654" placeholder="INSERT INTO ..." />
+            <marker date="1454596619720" expanded="true" signature="7544:7666" placeholder="INSERT INTO ..." />
+            <marker date="1454596619720" expanded="true" signature="7544:7686" placeholder="INSERT INTO ..." />
+            <marker date="1454596619720" expanded="true" signature="7931:7993" placeholder="UPDATE COMPA..." />
+            <marker date="1454596619720" expanded="true" signature="7931:7991" placeholder="UPDATE footb..." />
+            <marker date="1454596619720" expanded="true" signature="8229:8300" placeholder="SELECT first..footballer..." />
           </folding>
         </state>
       </provider>
@@ -464,23 +464,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/telegrambot.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="172" column="28" selection-start="8691" selection-end="8691" vertical-scroll-proportion="0.0" vertical-offset="2835" max-vertical-offset="3213">
-          <folding>
-            <element signature="e#24#39#0" expanded="true" />
-            <marker date="1454595485468" expanded="true" signature="7544:7668" placeholder="INSERT INTO ..." />
-            <marker date="1454595485468" expanded="true" signature="7544:7655" placeholder="INSERT INTO ..." />
-            <marker date="1454595485468" expanded="true" signature="7544:7654" placeholder="INSERT INTO ..." />
-            <marker date="1454595485468" expanded="true" signature="7544:7666" placeholder="INSERT INTO ..." />
-            <marker date="1454595485468" expanded="true" signature="7544:7686" placeholder="INSERT INTO ..." />
-            <marker date="1454595485468" expanded="true" signature="7931:7993" placeholder="UPDATE COMPA..." />
-            <marker date="1454595485468" expanded="true" signature="7931:7991" placeholder="UPDATE footb..." />
-            <marker date="1454595485468" expanded="true" signature="8229:8301" placeholder="SELECT first..footballer..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/requirements.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="375">
@@ -490,8 +473,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Procfile">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="0" selection-start="5" selection-end="5" vertical-scroll-proportion="0.04347826" vertical-offset="0" max-vertical-offset="119">
+        <state line="1" column="27" selection-start="5" selection-end="32" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="119">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/telegrambot.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="163" column="44" selection-start="8246" selection-end="8246" vertical-scroll-proportion="0.23544973" vertical-offset="2682" max-vertical-offset="3213">
+          <folding>
+            <element signature="e#24#39#0" expanded="true" />
+            <marker date="1454596619720" expanded="true" signature="7544:7668" placeholder="INSERT INTO ..." />
+            <marker date="1454596619720" expanded="true" signature="7544:7655" placeholder="INSERT INTO ..." />
+            <marker date="1454596619720" expanded="true" signature="7544:7654" placeholder="INSERT INTO ..." />
+            <marker date="1454596619720" expanded="true" signature="7544:7666" placeholder="INSERT INTO ..." />
+            <marker date="1454596619720" expanded="true" signature="7544:7686" placeholder="INSERT INTO ..." />
+            <marker date="1454596619720" expanded="true" signature="7931:7993" placeholder="UPDATE COMPA..." />
+            <marker date="1454596619720" expanded="true" signature="7931:7991" placeholder="UPDATE footb..." />
+            <marker date="1454596619720" expanded="true" signature="8229:8300" placeholder="SELECT first..footballer..." />
+          </folding>
         </state>
       </provider>
     </entry>

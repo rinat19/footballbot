@@ -161,7 +161,7 @@ def db_update(chat_id, photo_id):
 def db_select():
     conn = sqlite3.connect('telegrambot.db')
     log_event('Opened database successfully.')
-    cursor = conn.execute("SELECT first_name0, second_name, username FROM footballer WHERE visit==1")
+    cursor = conn.execute("SELECT first_name, second_name, username FROM footballer WHERE visit==1")
     for row in cursor:
         print "first_name = ", row[0]
         print "second_name = ", row[1]
