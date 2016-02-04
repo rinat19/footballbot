@@ -72,6 +72,7 @@ def run_command(offset, name, from_id, cmd):
         send_text(from_id, 'Бот предназначен для переклички сотрудников, идущих на футбол. \n\nЕсли отметиться второй раз, то бот перезапишет первый ответ. \n\nУзнать списки идущих и неидущих можно через команду /list') # Отправка ответа
 
     elif cmd == '/yes': # Ответ на yes
+        send_text(from_id, 'Молодцом!') # Отправка ответа
         send_sticker(from_id, 'BQADAgAD_gQAAkKvaQABbdMfUUWsaZEC') # Отправка ответа
 
     elif cmd == '/no': # Ответ на no
@@ -170,6 +171,7 @@ def db_select(chat_id):
     conn.close()
     data = {'chat_id': chat_id, 'text': cursor} # Формирование запроса
     request = requests.post(URL + TOKEN + '/sendMessage', data=data) # HTTP запрос
+    conn.close()
     if not request.status_code == 200: # Проверка ответа сервера
         return False # Возврат с неудачей
     return request.json()['ok'] # Проверка успешности обращения к API
