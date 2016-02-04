@@ -152,14 +152,14 @@ def check_mail():
     return True
 
 
-def db_insert(from_id, name):
+def db_insert(chat_id, name):
     conn = sqlite3.connect('telegrambot.db')
     log_event('Opened database successfully')
     cursor = conn.cursor()
-    cursor.execute("SELECT user_id FROM footballer WHERE user_id == '222222'")
+    cursor.execute("SELECT user_id FROM footballer WHERE user_id ==:user_id", {'user_id': chat_id})
     u = cursor.fetchone()
     if not u:
-        values = {'user_id': 222222, 'first_name': name, 'second_name': None, 'username': None, 'visit': None,
+        values = {'user_id': chat_id, 'first_name': name, 'second_name': None, 'username': None, 'visit': None,
               'resp_date': None}
         cursor.execute(
             "INSERT INTO footballer (user_id, first_name, second_name, username, visit, resp_date) VALUES (:user_id, :first_name, :second_name, :username, :visit, :resp_date)",
