@@ -1,6 +1,6 @@
 from datetime import datetime
 from time import sleep
-from telegrambot import send_text, visit_update
+from telegrambot import send_text, db_visit_update
 
 date_start = 5
 time_start1 = ('11:00')
@@ -15,4 +15,4 @@ while True:
             send_text(83109589, 'Привет! Идешь на футбол?')  # Отправка ответа
             sleep(59)
         if time_x in time_start2:
-            visit_update()
+            db_visit_update()

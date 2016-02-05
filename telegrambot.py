@@ -233,7 +233,7 @@ def db_delete(chat_id):
     return True
 
 
-def visit_update():
+def db_visit_update():
     conn = sqlite3.connect('telegrambot.db')
     log_event('Opened database successfully.')
     conn.execute("UPDATE footballer SET visit==:visit", {'visit': None})
