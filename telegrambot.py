@@ -51,7 +51,7 @@ def check_updates():
 
         from_id = update['message']['chat']['id']  # Извлечение ID чата (отправителя)
         #name = update['message']['from']['username'] # Извлечение username отправителя
-        name = update['message']['from']['first_name']  # Извлечение username отправителя
+        name = update['message']['from']['first_name']  # Извлечение first_name отправителя
         #        if from_id != ADMIN_ID: # Если отправитель не является администратором, то
         #            if from_id != ADMIN_GROUP:
         #                send_text(from_id, "You're not autorized to use me!") # ему отправляется соответствующее уведомление
@@ -153,13 +153,15 @@ def check_mail():
 
 
 def db_insert(chat_id, name):
+    second_name = update['message']['from']['last_name']  # Извлечение last_name отправителя
+    username = update['message']['from']['username']  # Извлечение username отправителя
     conn = sqlite3.connect('telegrambot.db')
     log_event('Opened database successfully')
     cursor = conn.cursor()
     cursor.execute("SELECT user_id FROM footballer WHERE user_id ==:user_id", {'user_id': chat_id})
     u = cursor.fetchone()
     if not u:
-        values = {'user_id': chat_id, 'first_name': name, 'second_name': None, 'username': None, 'visit': None,
+        values = {'user_id': chat_id, 'first_name': name, 'second_name': second_name, 'username': username, 'visit': None,
               'resp_date': None}
         cursor.execute(
             "INSERT INTO footballer (user_id, first_name, second_name, username, visit, resp_date) VALUES (:user_id, :first_name, :second_name, :username, :visit, :resp_date)",
