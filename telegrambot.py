@@ -27,6 +27,7 @@ TOKEN = '169184937:AAF7IQ3eWsMaTuMTQyA3fQMZ_m53g5qKQP0'  # Ключ автори
 offset = 0  # ID последнего полученного обновления
 
 
+# noinspection PyBroadException
 def check_updates():
     """Проверка обновлений на сервере и инициация действий, в зависимости от команды"""
     global offset
@@ -50,25 +51,32 @@ def check_updates():
             continue  # и переходим к следующему обновлению
 
         from_id = update['message']['chat']['id']  # Извлечение ID чата (отправителя)
-        #name = update['message']['from']['username'] # Извлечение username отправителя
         name = update['message']['from']['first_name']  # Извлечение first_name отправителя
+        if not 'last_name' in update['message']['from']:
+            second_name = None
+        else:
+            second_name = update['message']['from']['last_name']  # Извлечение last_name отправителя
+        if not 'username' in update['message']['from']:
+            username = None
+        else:
+            username = update['message']['from']['username']  # Извлечение username отправителя
         #        if from_id != ADMIN_ID: # Если отправитель не является администратором, то
         #            if from_id != ADMIN_GROUP:
         #                send_text(from_id, "You're not autorized to use me!") # ему отправляется соответствующее уведомление
         #                log_event('Unautorized: %s' % update) # обновление записывается в лог
         #                continue # и цикл переходит к следующему обновлению
         message = update['message']['text']  # Извлечение текста сообщения
-        parameters = (offset, name, from_id, message)
-        log_event('Message (id%s) from %s (id%s): "%s"' % parameters)  # Вывод в лог ID и текста сообщения
+        parameters = (offset, name, from_id, message, second_name, username)
+        #log_event('Message (id%s) from %s (id%s): "%s"' % parameters)  # Вывод в лог ID и текста сообщения
 
         # В зависимости от сообщения, выполняем необходимое действие
         run_command(*parameters)
 
 
-def run_command(offset, name, from_id, cmd):
+def run_command(offset, name, from_id, cmd, second_name, username):
     if cmd == '/start':  # Ответ на yes
         send_text(from_id, 'Привет! Идешь на футбол?')  # Отправка ответа
-        db_insert(from_id, name)
+        db_insert(from_id, name, second_name, username)
 
     elif cmd == '/help':  # Ответ на yes
         send_text(from_id,
@@ -86,6 +94,10 @@ def run_command(offset, name, from_id, cmd):
     elif cmd == '/list':  # Ответ на no
         #send_text(from_id, 'в работе...') # Отправка ответа
         db_select(from_id)
+
+    elif cmd == '/stop':  # Ответ на no
+        send_sticker(from_id, 'BQADAgADDgUAAkKvaQABF5KWQUCJNzkC')  # Отправка ответа
+        db_delete(from_id)
 
 
 def log_event(text):
@@ -152,17 +164,16 @@ def check_mail():
     return True
 
 
-def db_insert(chat_id, name, update=None):
-    second_name = update['message']['from']['last_name']  # Извлечение last_name отправителя
-    username = update['message']['from']['username']  # Извлечение username отправителя
+def db_insert(chat_id, name, second_name, username):
     conn = sqlite3.connect('telegrambot.db')
     log_event('Opened database successfully')
     cursor = conn.cursor()
     cursor.execute("SELECT user_id FROM footballer WHERE user_id ==:user_id", {'user_id': chat_id})
     u = cursor.fetchone()
     if not u:
-        values = {'user_id': chat_id, 'first_name': name, 'second_name': second_name, 'username': username, 'visit': None,
-              'resp_date': None}
+        values = {'user_id': chat_id, 'first_name': name, 'second_name': second_name, 'username': username,
+                  'visit': None,
+                  'resp_date': None}
         cursor.execute(
             "INSERT INTO footballer (user_id, first_name, second_name, username, visit, resp_date) VALUES (:user_id, :first_name, :second_name, :username, :visit, :resp_date)",
             (values))
@@ -171,16 +182,19 @@ def db_insert(chat_id, name, update=None):
         conn.close()
         return True
     else:
-        log_event('Record is created yet')
+        cursor.execute(
+            "UPDATE footballer SET first_name==:name, second_name==:second_name, username==:username WHERE user_id==:user_id",
+            {name, second_name, username, chat_id})
+        conn.commit()
+        log_event('Record updated successfully')
+        conn.close()
         return True
-
 
 
 def db_update(chat_id, visit_id):
     conn = sqlite3.connect('telegrambot.db')
     log_event('Opened database successfully.')
     conn.execute("UPDATE footballer SET visit==:visit WHERE user_id==:user_id", {'visit': visit_id, 'user_id': chat_id})
-    #conn.execute('UPDATE meshblock_1107 SET etv_1107==:update_1 WHERE meshblock_06==:select_1', {'update_1':pv[0:2], 'select_1':'21'})
     conn.commit()
     log_event('Records updated successfully.')
     conn.close()
@@ -201,13 +215,32 @@ def db_select(chat_id, f=None):
     #    dbinfo = cursor.fetchone()
     conn.close()
     if not f: f = '*Список пуст*'  # Если ответ пустой, тогда заменяем его на соответствующее сообщение
-    data = {'chat_id': chat_id, 'text': f}  # Формирование запроса
+    data = {'chat_id': chat_id, 'text': '\n'.join(f)}  # Формирование запроса
     log_event('Sending to %s: %s' % (chat_id, f))  # Запись события в лог
     request = requests.post(URL + TOKEN + '/sendMessage', data=data)  # HTTP запрос
     if not request.status_code == 200:  # Проверка ответа сервера
         return False  # Возврат с неудачей
     return request.json()['ok']  # Проверка успешности обращения к API
 
+
+def db_delete(chat_id):
+    conn = sqlite3.connect('telegrambot.db')
+    log_event('Opened database successfully.')
+    conn.execute("DELETE FROM footballer WHERE user_id==:user_id", {'user_id': chat_id})
+    conn.commit()
+    log_event('Operation done successfully.')
+    conn.close()
+    return True
+
+
+def visit_update():
+    conn = sqlite3.connect('telegrambot.db')
+    log_event('Opened database successfully.')
+    conn.execute("UPDATE footballer SET visit==:visit", {'visit': None})
+    conn.commit()
+    log_event('Operation done successfully.')
+    conn.close()
+    return True
 
 if __name__ == "__main__":
     while True:
