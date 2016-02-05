@@ -8,8 +8,8 @@
 [Ss]cripts
 pyvenv.cfg
 pip-selfcheck.json
-db_create.py
-.idea
-telegrambot.db
+/telegrambot.db
+/db_create.py
+/.idea
 
 # Created by .ignore support plugin (hsz.mobi)
