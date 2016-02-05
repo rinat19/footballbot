@@ -152,7 +152,7 @@ def check_mail():
     return True
 
 
-def db_insert(chat_id, name):
+def db_insert(chat_id, name, update=None):
     second_name = update['message']['from']['last_name']  # Извлечение last_name отправителя
     username = update['message']['from']['username']  # Извлечение username отправителя
     conn = sqlite3.connect('telegrambot.db')
