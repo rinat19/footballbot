@@ -201,22 +201,34 @@ def db_update(chat_id, visit_id):
     return True
 
 
-def db_select(chat_id, f=None):
+def db_select(chat_id, yes_list='***Идут: ', no_list='***Не идут: '):
     conn = sqlite3.connect('telegrambot.db')
     log_event('Opened database successfully.')
+    cursor = conn.execute("SELECT COUNT(user_id) FROM footballer WHERE visit==1")
+    for row in cursor.fetchall():
+        yes_list = yes_list + str(row[0]) + '\n'
+        yes_list = yes_list.decode('utf-8')
     cursor = conn.execute("SELECT first_name, second_name, username FROM footballer WHERE visit==1")
+    for row in cursor.fetchall():
+        yes_list = yes_list + row[0] + '\n'
     #    for row in cursor:
     #        print "first_name = ", row[0]
     #        print "second_name = ", row[1]
     #        print "username = ", row[2], "\n"
-    for f, s, u in cursor.fetchall():
-        print f, s, u
+    #for f, s, u in cursor.fetchall():
+    cursor = conn.execute("SELECT COUNT(user_id) FROM footballer WHERE visit==0")
+    for row in cursor.fetchall():
+        no_list = no_list + str(row[0]) + '\n'
+        no_list = no_list.decode('utf-8')
+    cursor = conn.execute("SELECT first_name, second_name, username FROM footballer WHERE visit==0")
+    for row in cursor.fetchall():
+        no_list = no_list + row[0] + '\n'
     log_event('Operation done successfully.')
-    #    dbinfo = cursor.fetchone()
     conn.close()
-    if not f: f = '*Список пуст*'  # Если ответ пустой, тогда заменяем его на соответствующее сообщение
-    data = {'chat_id': chat_id, 'text': '\n'.join(f)}  # Формирование запроса
-    log_event('Sending to %s: %s' % (chat_id, f))  # Запись события в лог
+    #if not yes_list: yes_list = '*Список пуст*'  # Если ответ пустой, тогда заменяем его на соответствующее сообщение
+    text = yes_list + no_list
+    data = {'chat_id': chat_id, 'text': text}  # Формирование запроса
+    log_event('Sending to %s: %s' % (chat_id, text))  # Запись события в лог
     request = requests.post(URL + TOKEN + '/sendMessage', data=data)  # HTTP запрос
     if not request.status_code == 200:  # Проверка ответа сервера
         return False  # Возврат с неудачей
@@ -231,7 +243,6 @@ def db_delete(chat_id):
     log_event('Operation done successfully.')
     conn.close()
     return True
-
 
 def db_visit_update():
     conn = sqlite3.connect('telegrambot.db')

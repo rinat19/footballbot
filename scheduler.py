@@ -7,7 +7,8 @@ time_start1 = ('11:00')
 time_start2 = ('23:00')
 while True:
     d = datetime.today()
-    #print d.strftime('%H:%M')
+    print d.strftime('%H:%M')
+    print 'weekday = ', d.weekday()
     date_x = d.weekday()
     time_x = d.strftime('%H:%M')
     if date_x == date_start:

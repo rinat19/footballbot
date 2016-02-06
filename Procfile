@@ -1,1 +1,1 @@
-init: python scheduler.py
+init: python telegrambot.py
