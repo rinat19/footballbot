@@ -184,7 +184,7 @@ def db_insert(chat_id, name, second_name, username):
     else:
         cursor.execute(
             "UPDATE footballer SET first_name==:name, second_name==:second_name, username==:username WHERE user_id==:user_id",
-            {name, second_name, username, chat_id})
+            {'name': name, 'second_name': second_name, 'username': username, 'user_id': chat_id})
         conn.commit()
         log_event('Record updated successfully')
         conn.close()
