@@ -107,6 +107,7 @@ def log_event(text):
     """
     event = '%s >> %s' % (time.ctime(), text)
     event = open('log.txt', 'a', newline=1)
+    event.close()
     print event
 
 
