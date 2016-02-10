@@ -214,7 +214,6 @@ def db_select(chat_id, yes_list='***Идут: ', no_list='***Не идут: '):
     cursor = conn.execute("SELECT first_name, second_name, username FROM footballer WHERE visit==1")
     for row in cursor.fetchall():
         yes_list = yes_list + row[0] + '\n'
-        yes_list = yes_list.decode('utf-8')
 
     #    for row in cursor:
     #        print "first_name = ", row[0]
@@ -228,13 +227,13 @@ def db_select(chat_id, yes_list='***Идут: ', no_list='***Не идут: '):
     cursor = conn.execute("SELECT first_name, second_name, username FROM footballer WHERE visit==0")
     for row in cursor.fetchall():
         no_list = no_list + row[0] + '\n'
-        no_list = no_list.decode('utf-8')
     log_event('Operation done successfully.')
     conn.close()
     #if not yes_list: yes_list = '*Список пуст*'  # Если ответ пустой, тогда заменяем его на соответствующее сообщение
     text = yes_list + no_list
     data = {'chat_id': chat_id, 'text': text}  # Формирование запроса
-    log_event('Sending to %s: %s' % (chat_id, text))  # Запись события в лог
+    #log_event('Sending to %s: %s' % (chat_id, text))  # Запись события в лог
+    log_event('Fully done.')
     request = requests.post(URL + TOKEN + '/sendMessage', data=data)  # HTTP запрос
     if not request.status_code == 200:  # Проверка ответа сервера
         return False  # Возврат с неудачей
