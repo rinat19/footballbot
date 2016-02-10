@@ -107,10 +107,10 @@ def log_event(text):
     """
     event = '%s >> %s' % (time.ctime(), text)
     print event
-    logfile = open('log.txt', 'a')
-    logfile.write(event)
-    logfile.write('\n')
-    logfile.close()
+    #logfile = open('log.txt', 'a')
+    #logfile.write(event)
+    #logfile.write('\n')
+    #logfile.close()
 
 def send_text(chat_id, text):
     """Отправка текстового сообщения по chat_id
@@ -214,6 +214,8 @@ def db_select(chat_id, yes_list='***Идут: ', no_list='***Не идут: '):
     cursor = conn.execute("SELECT first_name, second_name, username FROM footballer WHERE visit==1")
     for row in cursor.fetchall():
         yes_list = yes_list + row[0] + '\n'
+        yes_list = yes_list.decode('utf-8')
+
     #    for row in cursor:
     #        print "first_name = ", row[0]
     #        print "second_name = ", row[1]
@@ -226,6 +228,7 @@ def db_select(chat_id, yes_list='***Идут: ', no_list='***Не идут: '):
     cursor = conn.execute("SELECT first_name, second_name, username FROM footballer WHERE visit==0")
     for row in cursor.fetchall():
         no_list = no_list + row[0] + '\n'
+        no_list = no_list.decode('utf-8')
     log_event('Operation done successfully.')
     conn.close()
     #if not yes_list: yes_list = '*Список пуст*'  # Если ответ пустой, тогда заменяем его на соответствующее сообщение
