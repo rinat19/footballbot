@@ -106,10 +106,11 @@ def log_event(text):
     ToDo: 1) Запись лога в файл
     """
     event = '%s >> %s' % (time.ctime(), text)
-    event = open('log.txt', 'a', newline=1)
-    event.close()
     print event
-
+    logfile = open('log.txt', 'a')
+    logfile.write(event)
+    logfile.write('\n')
+    logfile.close()
 
 def send_text(chat_id, text):
     """Отправка текстового сообщения по chat_id
