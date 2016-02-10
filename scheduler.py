@@ -7,6 +7,7 @@ date_start = 3
 time_start1 = ('11:00')
 time_start2 = ('23:30')
 while True:
+    sleep(6)
     d = datetime.today()
     print d.strftime('%H:%M')
     print 'weekday = ', d.weekday()
