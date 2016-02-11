@@ -4,6 +4,7 @@ import time
 import subprocess
 import os
 import sqlite3
+from datetime import datetime
 #import mailchecker
 
 requests.packages.urllib3.disable_warnings()  # Подавление InsecureRequestWarning, с которым я пока ещё не разобрался
@@ -25,7 +26,8 @@ ADMIN_GROUP = -103322856  # ID группы. Комманды от других 
 URL = 'https://api.telegram.org/bot'  # Адрес HTTP Bot API
 TOKEN = '169184937:AAF7IQ3eWsMaTuMTQyA3fQMZ_m53g5qKQP0'  # Ключ авторизации для Вашего бота
 offset = 0  # ID последнего полученного обновления
-
+questionnaire = 0
+date_start = 4 # день недели запуска опроса и обнуления поля visit
 
 # noinspection PyBroadException
 def check_updates():
@@ -80,7 +82,7 @@ def run_command(offset, name, from_id, cmd, second_name, username):
 
     elif cmd == '/help':  # Ответ на yes
         send_text(from_id,
-                  'Бот предназначен для переклички сотрудников, идущих на футбол. \n\nЕсли отметиться второй раз, то бот перезапишет первый ответ. \n\nУзнать списки идущих и неидущих можно через команду /list')  # Отправка ответа
+                  'Бот предназначен для переклички сотрудников, идущих на футбол. \n\nЕсли отметиться второй раз, то бот перезапишет первый ответ. \n\nУзнать списки идущих и неидущих можно через команду /list  \n\nДля остановки подписки используйте команду /stop')  # Отправка ответа
 
     elif cmd == '/yes':  # Ответ на yes
         #send_text(from_id, 'Молодцом!') # Отправка ответа
@@ -254,14 +256,34 @@ def db_visit_update():
     log_event('Opened database successfully.')
     conn.execute("UPDATE footballer SET visit==:visit", {'visit': None})
     conn.commit()
-    log_event('Operation done successfully.')
+    log_event('Operation db_visit_update done successfully.')
     conn.close()
+    return True
+
+def questionnaire_n_visit_reset():
+    global questionnaire
+    global d
+    time_start1 = ('11:00')
+    time_start2 = ('23:59')
+    time_x = d.strftime('%H:%M')
+    if time_x in time_start1 and questionnaire == 0:
+        send_text('83109589', 'Идешь на футбол?')
+        questionnaire = 1
+        log_event('Questionnaire done successfully.')
+    if time_x in time_start2:
+        db_visit_update()
+        questionnaire = 0
+        log_event('Questionnaire has reset successfully.')
+        time.sleep(60)
     return True
 
 if __name__ == "__main__":
     while True:
         try:
             check_updates()
+            d = datetime.today()
+            if d.weekday() == date_start:
+                questionnaire_n_visit_reset()
             time.sleep(INTERVAL)
         except KeyboardInterrupt:
             print 'Прервано пользователем..'
