@@ -69,7 +69,7 @@ def check_updates():
         #                continue # и цикл переходит к следующему обновлению
         message = update['message']['text']  # Извлечение текста сообщения
         parameters = (offset, name, from_id, message, second_name, username)
-        #log_event('Message (id%s) from %s (id%s): "%s"' % parameters)  # Вывод в лог ID и текста сообщения
+        log_event('Message (id %s) from %s (id %s): "%s"' % (offset, name, from_id, message))  # Вывод в лог ID и текста сообщения
 
         # В зависимости от сообщения, выполняем необходимое действие
         run_command(*parameters)
@@ -77,7 +77,7 @@ def check_updates():
 
 def run_command(offset, name, from_id, cmd, second_name, username):
     if cmd == '/start':  # Ответ на yes
-        send_text(from_id, 'Привет! Идешь на футбол?')  # Отправка ответа
+        send_text(from_id, 'Привет! Идешь на футбол? \nОтвечай: /yes или /no')  # Отправка ответа
         db_insert(from_id, name, second_name, username)
 
     elif cmd == '/help':  # Ответ на yes
@@ -101,6 +101,13 @@ def run_command(offset, name, from_id, cmd, second_name, username):
         send_sticker(from_id, 'BQADAgADDgUAAkKvaQABF5KWQUCJNzkC')  # Отправка ответа
         db_delete(from_id)
 
+    elif cmd == '/reset_visit' and from_id == ADMIN_ID:  # Ответ на no
+        db_visit_update()
+        send_text(from_id, 'ok')  # Отправка ответа
+
+    elif cmd == '/send_opros' and from_id == ADMIN_ID:  # Ответ на no
+        send_questionnaire()
+        send_text(from_id, 'ok')  # Отправка ответа
 
 def log_event(text):
     """
@@ -232,10 +239,11 @@ def db_select(chat_id, yes_list='***Идут: ', no_list='***Не идут: '):
     log_event('Operation done successfully.')
     conn.close()
     #if not yes_list: yes_list = '*Список пуст*'  # Если ответ пустой, тогда заменяем его на соответствующее сообщение
+    #if not yes_list: yes_list = '*Список пуст*'  # Если ответ пустой, тогда заменяем его на соответствующее сообщение
     text = yes_list + no_list
     data = {'chat_id': chat_id, 'text': text}  # Формирование запроса
     #log_event('Sending to %s: %s' % (chat_id, text))  # Запись события в лог
-    log_event('Fully done.')
+    log_event('Lists sent, fully done.')
     request = requests.post(URL + TOKEN + '/sendMessage', data=data)  # HTTP запрос
     if not request.status_code == 200:  # Проверка ответа сервера
         return False  # Возврат с неудачей
@@ -260,6 +268,19 @@ def db_visit_update():
     conn.close()
     return True
 
+def send_questionnaire():
+    conn = sqlite3.connect('telegrambot.db')
+    log_event('Opened database successfully.')
+    cursor = conn.execute("SELECT user_id FROM footballer")
+    for row in cursor.fetchall():
+        user_id = row[0]
+        log_event('Sending to %s: %s' % (user_id, 'Идешь на футбол? Отвечай: /yes или /no'))  # Запись события в лог
+        data = {'chat_id': user_id, 'text': 'Идешь на футбол? \nОтвечай: /yes или /no'}  # Формирование запроса
+        requests.post(URL + TOKEN + '/sendMessage', data=data)  # HTTP запрос
+    log_event('Operation send_questionnaire done successfully.')
+    conn.close()
+    return True
+
 def questionnaire_n_visit_reset():
     global questionnaire
     global d
@@ -267,7 +288,7 @@ def questionnaire_n_visit_reset():
     time_start2 = ('23:59')
     time_x = d.strftime('%H:%M')
     if time_x in time_start1 and questionnaire == 0:
-        send_text('83109589', 'Идешь на футбол?')
+        send_questionnaire()
         questionnaire = 1
         log_event('Questionnaire done successfully.')
     if time_x in time_start2:
