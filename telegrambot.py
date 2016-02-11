@@ -274,8 +274,8 @@ def send_questionnaire():
     cursor = conn.execute("SELECT user_id FROM footballer")
     for row in cursor.fetchall():
         user_id = row[0]
-        log_event('Sending to %s: %s' % (user_id, 'Идешь на футбол? Отвечай: /yes или /no'))  # Запись события в лог
-        data = {'chat_id': user_id, 'text': 'Идешь на футбол? \nОтвечай: /yes или /no'}  # Формирование запроса
+        log_event('Sending to %s: %s' % (user_id, 'Привет! Идешь на футбол? Отвечай: /yes или /no'))  # Запись события в лог
+        data = {'chat_id': user_id, 'text': 'Привет! Идешь на футбол? \nОтвечай: /yes или /no'}  # Формирование запроса
         requests.post(URL + TOKEN + '/sendMessage', data=data)  # HTTP запрос
     log_event('Operation send_questionnaire done successfully.')
     conn.close()
