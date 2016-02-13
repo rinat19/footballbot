@@ -9,8 +9,8 @@ conn = psycopg2.connect(
     port='5432'
 )
 cur = conn.cursor()
-cur.execute('CREATE TABLE footballer (user_id INTEGER PRIMARY KEY, first_name VARCHAR(30), second_name VARCHAR(30), username VARCHAR(30), visit BOOLEAN, resp_date DATE, resp_time TIME WITHOUT TIME ZONE)')
-conn.commit()
+#cur.execute('CREATE TABLE footballer (user_id INTEGER PRIMARY KEY, first_name VARCHAR(30), second_name VARCHAR(30), username VARCHAR(30), visit BOOLEAN, resp_date DATE, resp_time TIME WITHOUT TIME ZONE)')
+#conn.commit()
 cur.execute('INSERT INTO footballer (user_id, first_name, second_name, username, visit, resp_date, resp_time) VALUES(83109589, "Rinat", NULL, "plohoidurdom", NULL, NULL, NULL)')
 conn.commit()
 #cur.execute('CREATE TABLE footballer_visit (id INTEGER PRIMARY KEY, user_id INTEGER, visit BOOLEAN, resp_date DATETIME)')
