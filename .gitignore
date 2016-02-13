@@ -11,4 +11,5 @@ pip-selfcheck.json
 #/db_create.py
 /.idea
 /log.txt
+/telegrambot.db
 # Created by .ignore support plugin (hsz.mobi)

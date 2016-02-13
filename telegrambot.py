@@ -87,11 +87,11 @@ def run_command(offset, name, from_id, cmd, second_name, username):
     elif cmd == '/yes':  # Ответ на yes
         #send_text(from_id, 'Молодцом!') # Отправка ответа
         send_sticker(from_id, 'BQADAgAD_gQAAkKvaQABbdMfUUWsaZEC')  # Отправка ответа
-        db_update(from_id, 1)
+        db_update(from_id, True)
 
     elif cmd == '/no':  # Ответ на no
         send_sticker(from_id, 'BQADAgADGgUAAkKvaQABSfrnIsfrgPYC')  # Отправка ответа
-        db_update(from_id, 0)
+        db_update(from_id, False)
 
     elif cmd == '/list':  # Ответ на no
         #send_text(from_id, 'в работе...') # Отправка ответа
@@ -180,23 +180,18 @@ def db_insert(chat_id, name, second_name, username):
     conn = psycopg2.connect(database='d5orecc0oeod38', user='dwxpxijyrlhnyp', password='HeTB8Lyf3BLhYbXjHBCV1Wy9zG', host='ec2-54-217-202-109.eu-west-1.compute.amazonaws.com', port='5432')
     log_event('Opened database successfully')
     cursor = conn.cursor()
-    cursor.execute("SELECT user_id FROM footballer WHERE user_id ==:user_id", {'user_id': chat_id})
+    cursor.execute("SELECT user_id FROM footballer WHERE user_id = %s", [chat_id])
     u = cursor.fetchone()
     if not u:
-        values = {'user_id': chat_id, 'first_name': name, 'second_name': second_name, 'username': username,
-                  'visit': None,
-                  'resp_date': None}
         cursor.execute(
-            "INSERT INTO footballer (user_id, first_name, second_name, username, visit, resp_date) VALUES (:user_id, :first_name, :second_name, :username, :visit, :resp_date)",
-            (values))
+            "INSERT INTO footballer (user_id, first_name, second_name, username, visit, resp_date, resp_time) VALUES (%s, %s, %s, %s, %s, %s, %s)", (chat_id, name, second_name, username, None, None, None))
         conn.commit()
         log_event('Records created successfully')
         conn.close()
         return True
     else:
         cursor.execute(
-            "UPDATE footballer SET first_name==:name, second_name==:second_name, username==:username WHERE user_id==:user_id",
-            {'name': name, 'second_name': second_name, 'username': username, 'user_id': chat_id})
+            "UPDATE footballer SET first_name = %s, second_name = %s, username = %s WHERE user_id = %s", [name, second_name, username, chat_id])
         conn.commit()
         log_event('Record updated successfully')
         conn.close()
@@ -207,7 +202,7 @@ def db_update(chat_id, visit_id):
     conn = psycopg2.connect(database='d5orecc0oeod38', user='dwxpxijyrlhnyp', password='HeTB8Lyf3BLhYbXjHBCV1Wy9zG', host='ec2-54-217-202-109.eu-west-1.compute.amazonaws.com', port='5432')
     log_event('Opened database successfully')
     cursor = conn.cursor()
-    cursor.execute("UPDATE footballer SET visit==:visit WHERE user_id==:user_id", {'visit': visit_id, 'user_id': chat_id})
+    cursor.execute("UPDATE footballer SET visit = %s WHERE user_id = %s", (visit_id, chat_id))
     conn.commit()
     log_event('Records updated successfully.')
     conn.close()
@@ -218,11 +213,11 @@ def db_select(chat_id, yes_list='***Идут: ', no_list='***Не идут: '):
     conn = psycopg2.connect(database='d5orecc0oeod38', user='dwxpxijyrlhnyp', password='HeTB8Lyf3BLhYbXjHBCV1Wy9zG', host='ec2-54-217-202-109.eu-west-1.compute.amazonaws.com', port='5432')
     log_event('Opened database successfully')
     cursor = conn.cursor()
-    cursor.execute("SELECT COUNT(user_id) FROM footballer WHERE visit==1")
+    cursor.execute("SELECT COUNT(user_id) FROM footballer WHERE visit = True")
     for row in cursor.fetchall():
         yes_list = yes_list + str(row[0]) + '\n'
         yes_list = yes_list.decode('utf-8')
-    cursor.execute("SELECT first_name, second_name, username FROM footballer WHERE visit==1")
+    cursor.execute("SELECT first_name, second_name, username FROM footballer WHERE visit = True")
     for row in cursor.fetchall():
         yes_list = yes_list + row[0] + '\n'
 
@@ -231,11 +226,11 @@ def db_select(chat_id, yes_list='***Идут: ', no_list='***Не идут: '):
     #        print "second_name = ", row[1]
     #        print "username = ", row[2], "\n"
     #for f, s, u in cursor.fetchall():
-    cursor.execute("SELECT COUNT(user_id) FROM footballer WHERE visit==0")
+    cursor.execute("SELECT COUNT(user_id) FROM footballer WHERE visit = FALSE")
     for row in cursor.fetchall():
         no_list = no_list + str(row[0]) + '\n'
         no_list = no_list.decode('utf-8')
-    cursor.execute("SELECT first_name, second_name, username FROM footballer WHERE visit==0")
+    cursor.execute("SELECT first_name, second_name, username FROM footballer WHERE visit = FALSE")
     for row in cursor.fetchall():
         no_list = no_list + row[0] + '\n'
     log_event('Operation done successfully.')
@@ -256,7 +251,7 @@ def db_delete(chat_id):
     conn = psycopg2.connect(database='d5orecc0oeod38', user='dwxpxijyrlhnyp', password='HeTB8Lyf3BLhYbXjHBCV1Wy9zG', host='ec2-54-217-202-109.eu-west-1.compute.amazonaws.com', port='5432')
     log_event('Opened database successfully')
     cursor = conn.cursor()
-    cursor.execute("DELETE FROM footballer WHERE user_id==:user_id", {'user_id': chat_id})
+    cursor.execute("DELETE FROM footballer WHERE user_id = %s", [chat_id])
     conn.commit()
     log_event('Operation done successfully.')
     conn.close()
@@ -266,7 +261,7 @@ def db_visit_update():
     conn = psycopg2.connect(database='d5orecc0oeod38', user='dwxpxijyrlhnyp', password='HeTB8Lyf3BLhYbXjHBCV1Wy9zG', host='ec2-54-217-202-109.eu-west-1.compute.amazonaws.com', port='5432')
     log_event('Opened database successfully')
     cursor = conn.cursor()
-    cursor.execute("UPDATE footballer SET visit==:visit", {'visit': None})
+    cursor.execute("UPDATE footballer SET visit = %s", [None])
     conn.commit()
     log_event('Operation db_visit_update done successfully.')
     conn.close()
