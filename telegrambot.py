@@ -3,7 +3,7 @@ import requests
 import time
 import subprocess
 import os
-import sqlite3
+import psycopg2
 from datetime import datetime
 #import mailchecker
 
@@ -177,7 +177,7 @@ def check_mail():
 
 
 def db_insert(chat_id, name, second_name, username):
-    conn = sqlite3.connect('telegrambot.db')
+    conn = psycopg2.connect(database='d5orecc0oeod38', user='dwxpxijyrlhnyp', password='HeTB8Lyf3BLhYbXjHBCV1Wy9zG', host='ec2-54-217-202-109.eu-west-1.compute.amazonaws.com', port='5432')
     log_event('Opened database successfully')
     cursor = conn.cursor()
     cursor.execute("SELECT user_id FROM footballer WHERE user_id ==:user_id", {'user_id': chat_id})
@@ -204,9 +204,10 @@ def db_insert(chat_id, name, second_name, username):
 
 
 def db_update(chat_id, visit_id):
-    conn = sqlite3.connect('telegrambot.db')
-    log_event('Opened database successfully.')
-    conn.execute("UPDATE footballer SET visit==:visit WHERE user_id==:user_id", {'visit': visit_id, 'user_id': chat_id})
+    conn = psycopg2.connect(database='d5orecc0oeod38', user='dwxpxijyrlhnyp', password='HeTB8Lyf3BLhYbXjHBCV1Wy9zG', host='ec2-54-217-202-109.eu-west-1.compute.amazonaws.com', port='5432')
+    log_event('Opened database successfully')
+    cursor = conn.cursor()
+    cursor.execute("UPDATE footballer SET visit==:visit WHERE user_id==:user_id", {'visit': visit_id, 'user_id': chat_id})
     conn.commit()
     log_event('Records updated successfully.')
     conn.close()
@@ -214,13 +215,14 @@ def db_update(chat_id, visit_id):
 
 
 def db_select(chat_id, yes_list='***Идут: ', no_list='***Не идут: '):
-    conn = sqlite3.connect('telegrambot.db')
-    log_event('Opened database successfully.')
-    cursor = conn.execute("SELECT COUNT(user_id) FROM footballer WHERE visit==1")
+    conn = psycopg2.connect(database='d5orecc0oeod38', user='dwxpxijyrlhnyp', password='HeTB8Lyf3BLhYbXjHBCV1Wy9zG', host='ec2-54-217-202-109.eu-west-1.compute.amazonaws.com', port='5432')
+    log_event('Opened database successfully')
+    cursor = conn.cursor()
+    cursor.execute("SELECT COUNT(user_id) FROM footballer WHERE visit==1")
     for row in cursor.fetchall():
         yes_list = yes_list + str(row[0]) + '\n'
         yes_list = yes_list.decode('utf-8')
-    cursor = conn.execute("SELECT first_name, second_name, username FROM footballer WHERE visit==1")
+    cursor.execute("SELECT first_name, second_name, username FROM footballer WHERE visit==1")
     for row in cursor.fetchall():
         yes_list = yes_list + row[0] + '\n'
 
@@ -229,11 +231,11 @@ def db_select(chat_id, yes_list='***Идут: ', no_list='***Не идут: '):
     #        print "second_name = ", row[1]
     #        print "username = ", row[2], "\n"
     #for f, s, u in cursor.fetchall():
-    cursor = conn.execute("SELECT COUNT(user_id) FROM footballer WHERE visit==0")
+    cursor.execute("SELECT COUNT(user_id) FROM footballer WHERE visit==0")
     for row in cursor.fetchall():
         no_list = no_list + str(row[0]) + '\n'
         no_list = no_list.decode('utf-8')
-    cursor = conn.execute("SELECT first_name, second_name, username FROM footballer WHERE visit==0")
+    cursor.execute("SELECT first_name, second_name, username FROM footballer WHERE visit==0")
     for row in cursor.fetchall():
         no_list = no_list + row[0] + '\n'
     log_event('Operation done successfully.')
@@ -251,27 +253,30 @@ def db_select(chat_id, yes_list='***Идут: ', no_list='***Не идут: '):
 
 
 def db_delete(chat_id):
-    conn = sqlite3.connect('telegrambot.db')
-    log_event('Opened database successfully.')
-    conn.execute("DELETE FROM footballer WHERE user_id==:user_id", {'user_id': chat_id})
+    conn = psycopg2.connect(database='d5orecc0oeod38', user='dwxpxijyrlhnyp', password='HeTB8Lyf3BLhYbXjHBCV1Wy9zG', host='ec2-54-217-202-109.eu-west-1.compute.amazonaws.com', port='5432')
+    log_event('Opened database successfully')
+    cursor = conn.cursor()
+    cursor.execute("DELETE FROM footballer WHERE user_id==:user_id", {'user_id': chat_id})
     conn.commit()
     log_event('Operation done successfully.')
     conn.close()
     return True
 
 def db_visit_update():
-    conn = sqlite3.connect('telegrambot.db')
-    log_event('Opened database successfully.')
-    conn.execute("UPDATE footballer SET visit==:visit", {'visit': None})
+    conn = psycopg2.connect(database='d5orecc0oeod38', user='dwxpxijyrlhnyp', password='HeTB8Lyf3BLhYbXjHBCV1Wy9zG', host='ec2-54-217-202-109.eu-west-1.compute.amazonaws.com', port='5432')
+    log_event('Opened database successfully')
+    cursor = conn.cursor()
+    cursor.execute("UPDATE footballer SET visit==:visit", {'visit': None})
     conn.commit()
     log_event('Operation db_visit_update done successfully.')
     conn.close()
     return True
 
 def send_questionnaire():
-    conn = sqlite3.connect('telegrambot.db')
+    conn = psycopg2.connect(database='d5orecc0oeod38', user='dwxpxijyrlhnyp', password='HeTB8Lyf3BLhYbXjHBCV1Wy9zG', host='ec2-54-217-202-109.eu-west-1.compute.amazonaws.com', port='5432')
     log_event('Opened database successfully.')
-    cursor = conn.execute("SELECT user_id FROM footballer")
+    cursor = conn.cursor()
+    cursor.execute("SELECT user_id FROM footballer")
     for row in cursor.fetchall():
         user_id = row[0]
         log_event('Sending to %s: %s' % (user_id, 'Привет! Идешь на футбол? Отвечай: /yes или /no'))  # Запись события в лог
