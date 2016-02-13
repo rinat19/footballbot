@@ -27,7 +27,7 @@ URL = 'https://api.telegram.org/bot'  # Адрес HTTP Bot API
 TOKEN = '169184937:AAF7IQ3eWsMaTuMTQyA3fQMZ_m53g5qKQP0'  # Ключ авторизации для Вашего бота
 offset = 0  # ID последнего полученного обновления
 questionnaire = 0
-date_start = 4 # день недели запуска опроса и обнуления поля visit
+date_start = 2 # день недели запуска опроса и обнуления поля visit
 
 # noinspection PyBroadException
 def check_updates():
