@@ -1,16 +1,12 @@
-import os
 import psycopg2
-import urlparse
 
-urlparse.uses_netloc.append("d5orecc0oeod38")
-url = urlparse.urlparse(os.environ["postgres://dwxpxijyrlhnyp:HeTB8Lyf3BLhYbXjHBCV1Wy9zG@ec2-54-217-202-109.eu-west-1.compute.amazonaws.com:5432/d5orecc0oeod38"])
 
 conn = psycopg2.connect(
-    database=url.path[1:],
-    user=url.username,
-    password=url.password,
-    host=url.hostname,
-    port=url.port
+    database='d5orecc0oeod38',
+    user='dwxpxijyrlhnyp',
+    password='HeTB8Lyf3BLhYbXjHBCV1Wy9zG',
+    host='ec2-54-217-202-109.eu-west-1.compute.amazonaws.com',
+    port='5432'
 )
 conn.execute('CREATE TABLE footballer (user_id INTEGER PRIMARY KEY, first_name VARCHAR(30), second_name VARCHAR(30), username VARCHAR(30, visit BOOLEAN, resp_date DATETIME))')
 conn.commit()
