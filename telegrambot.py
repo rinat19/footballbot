@@ -53,6 +53,7 @@ def check_updates():
             continue  # и переходим к следующему обновлению
 
         from_id = update['message']['chat']['id']  # Извлечение ID чата (отправителя)
+        #from_id = 83109589  # Извлечение ID чата (отправителя)
         name = update['message']['from']['first_name']  # Извлечение first_name отправителя
         if not 'last_name' in update['message']['from']:
             second_name = None
@@ -215,23 +216,19 @@ def db_select(chat_id, yes_list='***Идут: ', no_list='***Не идут: '):
     cursor = conn.cursor()
     cursor.execute("SELECT COUNT(user_id) FROM footballer WHERE visit = True")
     for row in cursor.fetchall():
+        #yes_list = yes_list.decode('utf-8')
         yes_list = yes_list + str(row[0]) + '\n'
-        yes_list = yes_list.decode('utf-8')
     cursor.execute("SELECT first_name, second_name, username FROM footballer WHERE visit = True")
     for row in cursor.fetchall():
+        #yes_list = yes_list.encode('utf-8')
         yes_list = yes_list + row[0] + '\n'
-
-    #    for row in cursor:
-    #        print "first_name = ", row[0]
-    #        print "second_name = ", row[1]
-    #        print "username = ", row[2], "\n"
-    #for f, s, u in cursor.fetchall():
     cursor.execute("SELECT COUNT(user_id) FROM footballer WHERE visit = FALSE")
     for row in cursor.fetchall():
+        #no_list = no_list.decode('utf-8')
         no_list = no_list + str(row[0]) + '\n'
-        no_list = no_list.decode('utf-8')
     cursor.execute("SELECT first_name, second_name, username FROM footballer WHERE visit = FALSE")
     for row in cursor.fetchall():
+        #no_list = no_list.encode('utf-8')
         no_list = no_list + row[0] + '\n'
     log_event('Operation done successfully.')
     conn.close()
