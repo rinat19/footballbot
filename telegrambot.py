@@ -116,7 +116,7 @@ def log_event(text):
     ToDo: 1) Запись лога в файл
     """
     event = '%s >> %s' % (time.ctime(), text)
-    event = event.decode('utf-8')
+    event = event.decode('ascii')
     print event
     #logfile = open('log.txt', 'a')
     #logfile.write(event)
