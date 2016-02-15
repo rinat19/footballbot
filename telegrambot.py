@@ -70,7 +70,7 @@ def check_updates():
         #                continue # и цикл переходит к следующему обновлению
         message = update['message']['text']  # Извлечение текста сообщения
         parameters = (offset, name, from_id, message, second_name, username)
-        log_event('Message (id %s) from %s (id %s): "%s"' % (offset, name, from_id, message))  # Вывод в лог ID и текста сообщения
+        #log_event('Message (id %s) from %s (id %s): "%s"' % (offset, name, from_id, message))  # Вывод в лог ID и текста сообщения
 
         # В зависимости от сообщения, выполняем необходимое действие
         run_command(*parameters)
