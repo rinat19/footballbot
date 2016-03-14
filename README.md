@@ -1,3 +1,3 @@
-# PiCam-with-Laser
+# Gootballbot
 
-Flask project to laser control and see video from camera
+Bot for telegram to check Who go to football
