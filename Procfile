@@ -1,1 +1,0 @@
-init: python telegrambot.py
