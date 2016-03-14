@@ -14,17 +14,17 @@ requests.packages.urllib3.disable_warnings()  # Подавление InsecureReq
 # Чтобы определить Ваш ID, я предлагаю отправить боту сообщение от своего имени (аккаунта) через любой клиент
 # А затем получить это сообщения с помощью обычного GET запроса
 # Для этого вставьте в адресную строку Вашего браузера следующий адрес, заменив <token> на свой ключ:
-# https://api.telegram.org/bot169184937:AAF7IQ3eWsMaTuMTQyA3fQMZ_m53g5qKQP0/getUpdates
+# https://api.telegram.org/bot_____/getUpdates
 # Затем, в ответе найдите объект "from":{"id":01234567,"first_name":"Name","username":"username"}
 # Внимательно проверьте имя, логин и текст сообщения
 # Если всё совпадает, то цифровое значение ключа "id" - это и есть ваш идентификатор
 
 # Переменным ADMIN_ID и TOKEN необходимо присвоить Вашим собственные значения
 INTERVAL = 3  # Интервал проверки наличия новых сообщений (обновлений) на сервере в секундах
-ADMIN_ID = 83109589  # ID пользователя. Комманды от других пользователей выполняться не будут
-ADMIN_GROUP = -103322856  # ID группы. Комманды от других пользователей выполняться не будут
+ADMIN_ID =   # ID пользователя. Комманды от других пользователей выполняться не будут
+ADMIN_GROUP =   # ID группы. Комманды от других пользователей выполняться не будут
 URL = 'https://api.telegram.org/bot'  # Адрес HTTP Bot API
-TOKEN = '169184937:AAF7IQ3eWsMaTuMTQyA3fQMZ_m53g5qKQP0'  # Ключ авторизации для Вашего бота
+TOKEN = ''  # Ключ авторизации для Вашего бота
 offset = 0  # ID последнего полученного обновления
 questionnaire = 0
 date_start = 2 # день недели запуска опроса и обнуления поля visit
@@ -178,7 +178,7 @@ def check_mail():
 
 
 def db_insert(chat_id, name, second_name, username):
-    conn = psycopg2.connect(database='d5orecc0oeod38', user='dwxpxijyrlhnyp', password='HeTB8Lyf3BLhYbXjHBCV1Wy9zG', host='ec2-54-217-202-109.eu-west-1.compute.amazonaws.com', port='5432')
+    conn = psycopg2.connect(database='', user='', password='', host='', port='')
     log_event('Opened database successfully')
     cursor = conn.cursor()
     cursor.execute("SELECT user_id FROM footballer WHERE user_id = %s", [chat_id])
@@ -200,7 +200,7 @@ def db_insert(chat_id, name, second_name, username):
 
 
 def db_update(chat_id, visit_id):
-    conn = psycopg2.connect(database='d5orecc0oeod38', user='dwxpxijyrlhnyp', password='HeTB8Lyf3BLhYbXjHBCV1Wy9zG', host='ec2-54-217-202-109.eu-west-1.compute.amazonaws.com', port='5432')
+    conn = psycopg2.connect(database='', user='', password='', host='', port='')
     log_event('Opened database successfully')
     cursor = conn.cursor()
     cursor.execute("UPDATE footballer SET visit = %s WHERE user_id = %s", (visit_id, chat_id))
@@ -211,7 +211,7 @@ def db_update(chat_id, visit_id):
 
 
 def db_select(chat_id, yes_list='***Идут: ', no_list='***Не идут: '):
-    conn = psycopg2.connect(database='d5orecc0oeod38', user='dwxpxijyrlhnyp', password='HeTB8Lyf3BLhYbXjHBCV1Wy9zG', host='ec2-54-217-202-109.eu-west-1.compute.amazonaws.com', port='5432')
+    conn = psycopg2.connect(database='', user='', password='', host='', port='')
     log_event('Opened database successfully')
     cursor = conn.cursor()
     cursor.execute("SELECT COUNT(user_id) FROM footballer WHERE visit = True")
@@ -248,7 +248,7 @@ def db_select(chat_id, yes_list='***Идут: ', no_list='***Не идут: '):
 
 
 def db_delete(chat_id):
-    conn = psycopg2.connect(database='d5orecc0oeod38', user='dwxpxijyrlhnyp', password='HeTB8Lyf3BLhYbXjHBCV1Wy9zG', host='ec2-54-217-202-109.eu-west-1.compute.amazonaws.com', port='5432')
+    conn = psycopg2.connect(database='', user='', password='', host='', port='')
     log_event('Opened database successfully')
     cursor = conn.cursor()
     cursor.execute("DELETE FROM footballer WHERE user_id = %s", [chat_id])
@@ -258,7 +258,7 @@ def db_delete(chat_id):
     return True
 
 def db_visit_update():
-    conn = psycopg2.connect(database='d5orecc0oeod38', user='dwxpxijyrlhnyp', password='HeTB8Lyf3BLhYbXjHBCV1Wy9zG', host='ec2-54-217-202-109.eu-west-1.compute.amazonaws.com', port='5432')
+    conn = psycopg2.connect(database='', user='', password='', host='', port='')
     log_event('Opened database successfully')
     cursor = conn.cursor()
     cursor.execute("UPDATE footballer SET visit = %s", [None])
@@ -268,7 +268,7 @@ def db_visit_update():
     return True
 
 def send_questionnaire():
-    conn = psycopg2.connect(database='d5orecc0oeod38', user='dwxpxijyrlhnyp', password='HeTB8Lyf3BLhYbXjHBCV1Wy9zG', host='ec2-54-217-202-109.eu-west-1.compute.amazonaws.com', port='5432')
+    conn = psycopg2.connect(database='', user='', password='', host='', port='')
     log_event('Opened database successfully.')
     cursor = conn.cursor()
     cursor.execute("SELECT user_id FROM footballer")
